@@ -1,0 +1,42 @@
+<mvc:View controllerName="com.satya.routingapp.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table id="productsTable"
+                items="{path:'/Products', parameters: { 'expand': 'Supplier' }}"
+                headerText="Products (Click on an item to set as navigated)" >
+                <columns>
+                    <Column id="productCol" width="12em">
+                        <Text text="Product" />
+                    </Column>
+                    <Column>
+                        <Text text="Supplier" />
+                    </Column>
+                    <Column>
+                        <Text text="Stock" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        type="Active"
+                        vAlign="Middle"
+                        navigated="{
+                                parts: [
+                                    'settings>/navigatedItem',
+                                    'ProductID'
+                                ],
+                                formatter: '.isNavigated'
+                            }"
+                        press="onPress">
+                        <cells>
+                            <ObjectIdentifier title="{ProductName}" text="{ProductID}" />
+                            <Text text="{Supplier/CompanyName}" />
+                            <Text text="{UnitsInStock}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
